@@ -1,6 +1,5 @@
 -- Script creates a stored procedure that adds a new score correction for a student.
 -- Query to create stored procedure
-DROP PROCEDURE AddBonus;
 DELIMITER $$
 
 CREATE PROCEDURE AddBonus(user_id INT, project_name VARCHAR(255), score INT)
