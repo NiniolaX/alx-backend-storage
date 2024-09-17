@@ -1,0 +1,4 @@
+-- Script creates a double column index on the table 'names' and the first letter of 'name' and the 'score'
+-- Query to create index
+CREATE INDEX idx_name_first_score
+    ON names(name(1), score);
