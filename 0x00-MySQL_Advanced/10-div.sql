@@ -1,6 +1,5 @@
 -- Script creates a function that computes and returns the division of two numbers, but returns 0 if the second number is 0
 -- Query that creates function
-DROP FUNCTION SafeDiv;
 DELIMITER $$
 
 CREATE FUNCTION SafeDiv (a INT, b INT)
