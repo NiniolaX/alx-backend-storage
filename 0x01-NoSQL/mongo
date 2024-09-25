@@ -1,0 +1,2 @@
+// Counts the number of items in collection 'school'
+db.school.countDocuments();
