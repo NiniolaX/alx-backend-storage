@@ -36,7 +36,7 @@ class Cache:
         self._redis.set(key, data)
         return key
 
-    def get(self, key: str, fn: Callable[[bytes], Any]) -> Any:
+    def get(self, key: str, fn: Callable[[bytes], Any] = None) -> Any:
         """
         Retrieves data from Redis with optional type conversion.
 
