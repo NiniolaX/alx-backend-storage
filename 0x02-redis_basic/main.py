@@ -6,6 +6,7 @@ import redis
 
 Cache = __import__('exercise').Cache
 
+print()
 print("Test 1")
 cache = Cache()
 
@@ -24,11 +25,26 @@ TEST_CASES = {
     "bar": lambda d: d.decode("utf-8")
 }
 
+print()
 print("Test 2")
 for value, fn in TEST_CASES.items():
     key = cache.store(value)
     assert cache.get(key, fn=fn) == value
 
+print()
 print("Test 3")
 cache.store(b"foo")
 print(cache.get("foo"))
+
+print()
+print("Test 4")
+Cache = __import__('exercise').Cache
+
+cache = Cache()
+
+cache.store(b"first")
+print(cache.get(cache.store.__qualname__))
+
+cache.store(b"second")
+cache.store(b"third")
+print(cache.get(cache.store.__qualname__))

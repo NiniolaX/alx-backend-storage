@@ -4,7 +4,24 @@ Contains a "Cache" class.
 """
 import redis
 import uuid
+from functools import wraps
 from typing import Union, Callable, Any
+
+
+def count_calls(method: Callable) -> Callable:
+    """ Decorator to count the number of times a method is called """
+    @wraps(method)
+    def wrapper(self, *args, **kwargs):
+        """" Increments call counts each time the method is called """
+        # Increment the count in redis
+        key = method.__qualname__
+        self._redis.incr(key)  # If the key does not exist, it is set to 0
+        # before performing the operation.
+
+        # Call the original method and return its result
+        return method(self, *args, **kwargs)
+
+    return wrapper
 
 
 class Cache:
@@ -21,6 +38,7 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """
         Stores a 'data' argument in Redis using a randomly generated key and
