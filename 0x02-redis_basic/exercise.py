@@ -14,9 +14,8 @@ def count_calls(method: Callable) -> Callable:
     def wrapper(self, *args, **kwargs):
         """" Increments call counts each time the method is called """
         # Increment the count in redis
-        key = method.__qualname__
-        self._redis.incr(key)  # If the key does not exist, it is set to 0
-        # before performing the operation.
+        self._redis.incr(method.__qualname__)  # If the key does not exist, it
+        # is set to 0 before performing the operation.
 
         # Call the original method and return its result
         return method(self, *args, **kwargs)
