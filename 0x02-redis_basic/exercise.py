@@ -117,7 +117,14 @@ class Cache:
 
 
 def replay(method: Callable) -> None:
-    """ Displays the history of calls of a particular Cache method """
+    """ Displays the history of calls of a particular Cache method
+
+    Args:
+        method (callable): Method whose history is to be displayed
+
+    Return:
+        None
+    """
     # Get Cache instance from method
     cache = method.__self__
     db = cache._redis
