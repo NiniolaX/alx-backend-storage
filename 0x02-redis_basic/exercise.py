@@ -114,3 +114,23 @@ class Cache:
         """
         data = self.get(key)
         return int(data)
+
+
+def replay(method: Callable) -> None:
+    """ Displays the history of calls of a particular Cache method """
+    # Get Cache instance from method
+    cache = method.__self__
+    db = cache._redis
+    method_name = method.__qualname__
+
+    # Get method history
+    method_calls = int(db.get(method_name))
+    inputs = db.lrange(f"{method_name}:inputs", 0, -1)
+    outputs = db.lrange(f"{method_name}:outputs", 0, -1)
+
+    # Print history
+    print(f"{method_name} was called {method_calls} times:")
+    for args, result in zip(inputs, outputs):
+        decoded_args = args.decode('utf-8')
+        decoded_result = result.decode('utf-8')
+        print(f"{method_name}{decoded_args} -> {decoded_result}")
