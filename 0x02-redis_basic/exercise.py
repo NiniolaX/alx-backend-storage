@@ -133,4 +133,4 @@ def replay(method: Callable) -> None:
     for args, result in zip(inputs, outputs):
         decoded_args = args.decode('utf-8')
         decoded_result = result.decode('utf-8')
-        print(f"{method_name}{decoded_args} -> {decoded_result}")
+        print(f"{method_name}{decoded_args}") # -> {decoded_result}")

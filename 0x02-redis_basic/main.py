@@ -77,5 +77,6 @@ replay = __import__('exercise').replay
 cache = Cache()
 cache.store("foo")
 cache.store("bar")
-cache.store(42)
+cache.store("egg")
+cache.store("eggsperiment")
 replay(cache.store)
